@@ -24,13 +24,13 @@ function mainMenu(){
             <div class="col-2 text-center">
                 ${summary(category)}
             </div>
-            <div class="col-2">
-                <img src="img/icon/delete.png" class="icon" onclick=delCategory('${category}')>
-            </div>
             ${li}
             </div>
         </div>
         <hr>`;
+        // <div class="col-2">
+        //         <img src="img/icon/delete.png" style="z-index: 3" class="icon" onclick=delCategory('${category}')>
+        // </div>
     }
 }
 
