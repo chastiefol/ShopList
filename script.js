@@ -1,5 +1,11 @@
 let shopList = {};
 
+function readyState(){
+    if (localStorage.shopList){
+        shopList = JSON.parse(localStorage.shopList);
+        mainMenu();
+    }
+}
 function mainMenu(){
     let mainMenu = document.querySelector("#shopList");
     let quantity = document.querySelector("#quantity");
@@ -13,7 +19,7 @@ function mainMenu(){
     for (category in shopList){
         let li = `<div class="col-12"><ul>`;
         for (item in shopList[category]){
-            li += `<li>${item} ${shopList[category][item]} บาท </li>`;
+            li += `<li>${item} ${shopList[category][item][0]} บาท </li>`;
         }
         li += "</ul>";
         mainMenu.innerHTML +=
@@ -39,9 +45,13 @@ function categoryList(category){
     let itemList = document.querySelector("#itemList");
     if (!category){
         let type = document.querySelector("#type").value;
+        if (type in shopList){
+            alert("คุณมีหมวดหมู่นี้อยู่แล้ว");
+        }
         addMenu.children[1].innerText = type;
         addMenu.children[2].value = 0;
         shopList[type] = {}
+        localStorage.setItem("shopList", JSON.stringify(shopList));
     }
     else{
         addMenu.children[1].innerText = category;
@@ -49,8 +59,15 @@ function categoryList(category){
     }
     itemList.innerHTML = '';
     for (item in shopList[category]){
-        itemList.innerHTML += 
-        `<button class="btn btn-danger m-2 p-2 text-center" onclick='toggleMode(this)'> ${item} ${shopList[category][item]}</button>`;
+        if (shopList[category][item][1]){
+            itemList.innerHTML += 
+            `<button class="btn btn-success m-2 p-2 text-center" onclick='toggleMode(this)'> ${item} ${shopList[category][item][0]}</button>`;
+        }
+        else{
+           itemList.innerHTML += 
+            `<button class="btn btn-danger m-2 p-2 text-center" onclick='toggleMode(this)'> ${item} ${shopList[category][item][0]}</button>`; 
+        }
+        
     }
     document.querySelector("#addMenu").style.display = "flex";
 }
@@ -62,10 +79,11 @@ function addItem(){
     if(item){
         let type = addMenu.children[1].innerText;
         if (!(item in shopList[type]))
-            shopList[type][item] = parseInt(price)?parseInt(price):0;
+            shopList[type][item] = [parseInt(price)?parseInt(price):0, false];
         else
             alert("คุณมีรายการนี้อยู่แล้ว");
         clearCache("addMenu");
+        localStorage.setItem("shopList", JSON.stringify(shopList));
         categoryList(type);
     }
 
@@ -73,11 +91,11 @@ function addItem(){
 
 function summary(category){
     let price = 0;
-    console.log(category)
+    // console.log(category)
     if (category == "Cost"){
         for (type in shopList){
             for(item in shopList[type]){
-                price += shopList[type][item]
+                price += shopList[type][item][0]
             }
         }
     }
@@ -90,7 +108,7 @@ function summary(category){
     }
     else{
         for(item in shopList[category]){
-            price += shopList[category][item]
+            price += shopList[category][item][0]
         }
     }
     return price;
@@ -104,6 +122,7 @@ function clearCache(type){
     else {
         if (confirm('คุณยืนยันการล้างหรือไม่')){
             shopList = {}
+            localStorage.removeItem("shopList");
             mainMenu();
         }  
     }
@@ -111,14 +130,21 @@ function clearCache(type){
 
 function delCategory(category){
     delete shopList[category];
+    localStorage.setItem("shopList", JSON.stringify(shopList));
     mainMenu();
 }
 
 function toggleMode(ele){
+    type = document.querySelector("#addMenu").children[1].innerText;
+    item = ele.innerText.split(" ")[0];
+    // console.log(item);
     if (ele.classList[1] == "btn-danger"){
         ele.classList = "btn btn-success m-2 p-2 text-center";
+        shopList[type][item][1] = true;
     }
     else{
         ele.classList = "btn btn-danger m-2 p-2 text-center";
+        shopList[type][item][1] = false;
     }
+    localStorage.setItem("shopList", JSON.stringify(shopList));
 }
