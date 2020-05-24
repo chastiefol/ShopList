@@ -114,31 +114,33 @@
             <div class="row px-3">
                 <input type="text" id="item" class="form-control col-5 my-2 mx-auto" placeholder="รายการสินค้า">
                 <input type="text" id="price" class="form-control col-5 my-2 mx-auto" placeholder="ราคา">
-                <button class="btn btn-secondary mx-3 my-2 p-2 text-center w-100"  onclick="addItem()">เพิ่ม</button>
-                <button class="btn btn-primary mx-3 my-2 p-2 text-center w-100" onclick="mainMenu()">ตกลง</button>
+                <button class="btn btn-primary mx-3 my-2 p-2 text-center w-100"  onclick="addItem()">เพิ่ม</button>
+                <button class="btn btn-success mx-3 my-2 p-2 text-center w-100" onclick="mainMenu()">ตกลง</button>
             </div>
         </div>
-        <div class="row p-3">
-            <div class="col-8">
-                <h6 class="text-muted">หมวดหมู่</h6>
+        <div class="hide">
+            <div class="row p-3">
+                <div class="col-8">
+                    <h6 class="text-muted">หมวดหมู่</h6>
+                </div>
+                <div class="col-2 justify-content-end">
+                    <h6 class="text-muted">ราคา</h6>
+                </div>
             </div>
-            <div class="col-2 justify-content-end">
-                <h6 class="text-muted">ราคา</h6>
+            <div id="shopList"></div>
+            <!-- Add Category-->
+            <div class="row px-3 pb-3">
+                <div class="col-9">
+                    <input type="text" class="form-control" id="type" placeholder="ระบุหมวดหมู่" list="category" autocomplete="off">
+                </div>
+                <div class="col-3">
+                    <button class="btn btn-primary p-2 text-center w-100" onclick="categoryList()">เพิ่ม</button>
+                </div>
             </div>
-        </div>
-        <div id="shopList"></div>
-        <!-- Add Category-->
-         <div class="row px-3 pb-3">
-            <div class="col-9">
-                <input type="text" class="form-control" id="type" placeholder="ระบุหมวดหมู่" list="category" autocomplete="off">
-            </div>
-            <div class="col-3">
-                <button class="btn btn-primary p-2 text-center w-100" onclick="categoryList()">เพิ่ม</button>
-            </div>
-        </div>
-        <div class="row px-3 pb-3">
-            <div class="col-12">
-                <h6 class="text-danger" onclick="clearCache()">ล้างรายการทั้งหมด</h6>
+            <div class="row px-3 pb-3">
+                <div class="col-12">
+                    <h6 class="text-danger" onclick="clearCache()">ล้างรายการทั้งหมด</h6>
+                </div>
             </div>
         </div>
     </div>

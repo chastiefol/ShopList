@@ -38,6 +38,7 @@ function mainMenu(){
         //         <img src="img/icon/delete.png" style="z-index: 3" class="icon" onclick=delCategory('${category}')>
         // </div>
     }
+    document.querySelector(".hide").style.display = "block";
 }
 
 function categoryList(category){
@@ -61,15 +62,16 @@ function categoryList(category){
     for (item in shopList[category]){
         if (shopList[category][item][1]){
             itemList.innerHTML += 
-            `<button class="btn btn-success m-2 p-2 text-center" onclick='toggleMode(this)'> ${item} ${shopList[category][item][0]}</button>`;
+            `<button class="btn btn-success my-2 mr-2 p-2 text-center" onclick='toggleMode(this)'> ${item} ${shopList[category][item][0]} บาท</button>`;
         }
         else{
            itemList.innerHTML += 
-            `<button class="btn btn-danger m-2 p-2 text-center" onclick='toggleMode(this)'> ${item} ${shopList[category][item][0]}</button>`; 
+            `<button class="btn btn-outline-secondary my-2 mr-2 p-2 text-center" onclick='toggleMode(this)'> ${item} ${shopList[category][item][0]} บาท</button>`; 
         }
         
     }
     document.querySelector("#addMenu").style.display = "flex";
+    document.querySelector(".hide").style.display = "none";
 }
 
 function addItem(){
@@ -138,12 +140,12 @@ function toggleMode(ele){
     type = document.querySelector("#addMenu").children[1].innerText;
     item = ele.innerText.split(" ")[0];
     // console.log(item);
-    if (ele.classList[1] == "btn-danger"){
-        ele.classList = "btn btn-success m-2 p-2 text-center";
+    if (ele.classList[1] == "btn-outline-secondary"){
+        ele.classList = "btn btn-success my-2 mr-2 p-2 text-center";
         shopList[type][item][1] = true;
     }
     else{
-        ele.classList = "btn btn-danger m-2 p-2 text-center";
+        ele.classList = "btn btn-outline-secondary my-2 mr-2 p-2 text-center";
         shopList[type][item][1] = false;
     }
     localStorage.setItem("shopList", JSON.stringify(shopList));
