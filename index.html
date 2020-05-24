@@ -82,6 +82,15 @@
             position: relative;
             z-index: 1;
         }
+
+        .btn-kmitl{
+            background-color: #FC7634;
+            color: white;
+        }
+
+        .icon{
+            width: 1.75rem;
+        }
     </style>
 </head>
 
@@ -112,10 +121,11 @@
                 <div class="col-12" id="itemList"></div>
             </div>
             <div class="row px-3">
-                <input type="text" id="item" class="form-control col-5 my-2 mx-auto" placeholder="รายการสินค้า">
-                <input type="text" id="price" class="form-control col-5 my-2 mx-auto" placeholder="ราคา">
-                <button class="btn btn-primary mx-3 my-2 p-2 text-center w-100"  onclick="addItem()">เพิ่ม</button>
-                <button class="btn btn-success mx-3 my-2 p-2 text-center w-100" onclick="mainMenu()">ตกลง</button>
+                <input type="text" id="item" class="form-control col-4 my-2 mx-auto" placeholder="รายการสินค้า">
+                <input type="text" id="price" class="form-control col-4 my-2 mx-auto" placeholder="ราคา">
+                <a onclick="addItem()" class="form-control col-1 my-2 mx-auto border-white px-0"><img src="img/icon/add.png" class="icon mx-auto"></a>
+                <!-- <button class="btn btn-secondary mx-3 my-2 p-2 text-center w-100"  onclick="addItem()">เพิ่ม</button> -->
+                <button class="btn btn-primary mx-3 my-2 p-2 text-center w-100" onclick="mainMenu()">ตกลง</button>
             </div>
         </div>
         <div class="hide">
